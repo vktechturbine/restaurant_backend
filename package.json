@@ -1,9 +1,27 @@
 {
+  "name": "restaurant-backend",
+  "version": "1.0.0",
+  "description": "Restaurant backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vktechturbine/restaurant_backend.git"
+  },
+  "author": "VishalKerlekar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vktechturbine/restaurant_backend/issues"
+  },
+  "homepage": "https://github.com/vktechturbine/restaurant_backend#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.0.0",
-    "mongoose": "^7.5.0"
+    "mongoose": "^7.5.0",
+    "nodemon": "^3.0.1"
   }
 }
