@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
-import UserModel from "../models/User";
+import {UserModel} from "../models/User";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const userRegister = async (request: Request, response: Response) => {
-  const { email, password, name } = request.body;
+  console.log(request.body);
+  const { email, password, username } = request.body;
 
   const user = await UserModel.findOne({ email: email });
 
@@ -30,7 +31,7 @@ const userRegister = async (request: Request, response: Response) => {
       const user = new UserModel({
         email: email,
         password: hashpw,
-        name: name,
+        name: username,
       });
 
       return user.save();
@@ -47,10 +48,14 @@ const userRegister = async (request: Request, response: Response) => {
           { expiresIn: "1h" }
         );
         return response.status(200).json({
-          email: user.email,
+          statusCode:200,
+          data:{
+            email: user.email,
           lastName: user.lastName,
-          name: user.name,
-          token: token,
+          username: user.name,
+          token: token
+        },
+        message:"User Registered Successfully"
         });
       }
     })
@@ -85,7 +90,11 @@ const loginUser = async (request: Request, response: Response) => {
             email: loadUser.email
         }, 'somesupersecretsecret');
 
-        return response.status(200).json({ email: loadUser.email, lastName: loadUser.lastName, name: loadUser.name, token: token });
+        return response.status(200).json({ 
+          statusCode:200,
+          data:{email: loadUser.email, lastName: loadUser.lastName, name: loadUser.name, token: token },
+          message:"user Login Successfully"
+        });
 
     }
 }).catch(error => {
