@@ -6,7 +6,7 @@ const addProduct = async (request: Request, response: Response) => {
 
     const item = await Items.create({
         productName:name,
-        image:image,
+        productImage:image,
         price:price,
         quantity:quantity,
         description:description,
@@ -26,5 +26,20 @@ const addProduct = async (request: Request, response: Response) => {
         })
   )
 }
-
-export  {addProduct};
+const showItem =async (request:Request,response:Response) => {
+    
+    const items = await Items.find();
+   
+    if(!items)
+    {
+        return response.status(500).json("There is an error to fetch Items");
+    }
+    return(
+        response.status(200).json({
+            statusCoode:200,
+            data:items,
+            message:"items Fetched Successfully"
+        })
+    )
+}
+export  {addProduct, showItem};

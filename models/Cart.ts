@@ -4,10 +4,10 @@ import Items from "./Item";
 const itmes = Items.schema;
 
 const cartSchema = new mongoose.Schema({
-    userEmail: {
-        type: String,
-        require:true
-      },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'UserModel',
+  },
       items: {type:[itmes]},
 })
 

@@ -28,14 +28,14 @@ const CartItem = async (request: Request, response: Response) => {
     }
 
     // Add the cart item to the user's cart
-    await cart.items.push({name,price,quantity});
+    await cart.items.push({productName:name,price:price,quantity:quantity});
 
     // Save the cart
     await cart.save();
 
     response
       .status(201)
-      .json({ message: "Item added to cart successfully", item: {name,price,quantity} });
+      .json({ message: "Item added to cart successfully", item: {name:name,price:price,quantity:quantity} });
   } catch (error) {
     console.error("Error adding item to cart:", error);
     response.status(500).json({ error: "Internal server error" });
